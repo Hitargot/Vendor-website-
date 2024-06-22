@@ -2,37 +2,37 @@ document.addEventListener('DOMContentLoaded', function() {
     // Define exchange rates for different payment methods and currencies
     const exchangeRates = {
         paypal: {
-            usd: 450,
+            usd: 900,
             eur: 0.85,
             gbp: 0.75
             // Add more currencies as needed
         },
         crypto: {
-            usd: 500,
+            usd: 1350,
             eur: 0.90,
             gbp: 0.80
             // Add more currencies as needed
         },
         payoneer: {
-            usd: 430,
+            usd: 1100,
             eur: 0.80,
             gbp: 0.70
             // Add more currencies as needed
         },
         fiverr: {
-            usd: 440,
+            usd: 1100,
             eur: 0.82,
             gbp: 0.72
             // Add more currencies as needed
         },
         us_bank: {
-            usd: 420,
+            usd: 1000,
             eur: 0.78,
             gbp: 0.68
             // Add more currencies as needed
         },
         upwork: {
-            usd: 435,
+            usd: 1100,
             eur: 0.83,
             gbp: 0.73
             // Add more currencies as needed
@@ -199,3 +199,27 @@ document.addEventListener('DOMContentLoaded', function() {
         var navLinks = document.getElementById("nav-links");
         navLinks.classList.toggle("open");
     }    
+  document.getElementById('review-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    // Get form data
+    const name = document.getElementById('name').value;
+    const review = document.getElementById('review').value;
+    const rating = document.querySelector('input[name="rating"]:checked').value;
+
+    // Perform form validation
+    if (name && review && rating) {
+        // For now, we'll just log the data to the console
+        console.log('Name:', name);
+        console.log('Review:', review);
+        console.log('Rating:', rating);
+
+        // Display a confirmation message
+        alert('Thank you for your review!');
+
+        // Clear the form
+        document.getElementById('review-form').reset();
+    } else {
+        alert('Please fill in all fields and select a rating.');
+    }
+});
