@@ -2,21 +2,21 @@ document.addEventListener('DOMContentLoaded', function() {
     // Define exchange rates for different payment methods and currencies
     const exchangeRates = {
         paypal: {
-            usd: 900,
-            eur: 0.85,
-            gbp: 0.75
+            usd: 100,
+            eur: 1200,
+            gbp: 1400
             // Add more currencies as needed
         },
         crypto: {
-            usd: 1350,
-            eur: 0.90,
-            gbp: 0.80
+            usd: 1450,
+            eur: 1550,
+            gbp: 1750
             // Add more currencies as needed
         },
         payoneer: {
-            usd: 1100,
-            eur: 0.80,
-            gbp: 0.70
+            usd: 1200,
+            eur: 1300,
+            gbp: 1500
             // Add more currencies as needed
         },
         fiverr: {
@@ -26,21 +26,21 @@ document.addEventListener('DOMContentLoaded', function() {
             // Add more currencies as needed
         },
         us_bank: {
-            usd: 1000,
-            eur: 0.78,
-            gbp: 0.68
+            usd: 1100,
+            eur: 1200,
+            gbp: 1300
             // Add more currencies as needed
         },
         upwork: {
-            usd: 1100,
-            eur: 0.83,
-            gbp: 0.73
+            usd: 1200,
+            eur: 1300,
+            gbp: 1500
             // Add more currencies as needed
         },
         website_recharge: {
-            5: 9500,
-            10: 19000,
-            15: 28500,
+            5: 1000,
+            10: 20000,
+            15: 29000,
             20: 38000,
             25: 47500,
             30: 57000,
