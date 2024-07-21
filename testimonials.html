@@ -4,71 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Testimonials</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="android-chrome-512x512.png" sizes="512x512" type="image/png">
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="icon" href="../img/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="icon" href="../img/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="apple-touch-icon" href="../img/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" href="../img/android-chrome-192x192.png" sizes="192x192" type="image/png">
+    <link rel="icon" href="../img/android-chrome-512x512.png" sizes="512x512" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="preload" href="https://formspree.io/static/img/loading.svg?t=1721463946" as="image">
     <style>
-/* Modal Styles */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
+        /* Modal Styles */
+        .modal {
+            display: none;/* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
+        }
+        
+        .modal-content {
+            margin: 10% auto; /* Centered and a bit closer to the top on mobile */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 90%; /* Make it almost full-width on mobile */
+            max-width: 500px; /* But limit the max-width for larger screens */
+            background-color: #093028; /* Green background */
+            color: white;
+            height: 150px;
+            text-align: center;
+            border-radius: 10px; /* Rounded corners for better aesthetics */
+        }
+        #modalOkButton {
+            background-color: white;
+            color: green;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        #modalOkButton:hover {
+            background-color: #f1f1f1;
+        }
+        @media (max-width: 600px) {
+    .modal-content {
+        border-radius: 1px;
+        height: 100px;
+        width: 100%; /* Make it almost full-width on smaller screens */
+        margin: 20% auto; /* Adjust margin for better placement on mobile */
+    }
 }
-
-.modal-content {
-    margin: 10% auto; /* Centered and a bit closer to the top on mobile */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 90%; /* Make it almost full-width on mobile */
-    max-width: 500px; /* But limit the max-width for larger screens */
-    background-color: green; /* Green background */
-    color: white;
-    text-align: center;
-    border-radius: 10px; /* Rounded corners for better aesthetics */
-}
-
-.close {
-    color: white;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-#modalOkButton {
-    background-color: white;
-    color: green;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-#modalOkButton:hover {
-    background-color: #f1f1f1;
-}
-
-    </style>
+        
+            </style>
 </head>
 <body>
     <header>
         <div class="logo">
-            <img src="Exodollarium-01.png" alt="Exdollarium Logo">
+            <img src="../img/Exodollarium-01.png" alt="Exdollarium Logo">
             <span><b>Exdollarium</b></span>
         </div>
         <nav>
@@ -175,13 +173,13 @@
     </footer>
 
     <!-- Modal -->
-<div id="submissionModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <p>Review submitted successfully!</p>
-        <button id="modalOkButton">OK</button>
+    <div id="submissionModal" class="modal">
+        <div class="modal-content">
+            <p>Review submitted successfully!</p>
+            <p>Thank you!</p>
+            <button id="modalOkButton">OK</button>
+        </div>
     </div>
-</div>
 
 
     <script>
@@ -203,6 +201,10 @@
                 }).then(response => {
                     if (response.ok) {
                         showModal(); // Show modal on successful submission
+                        setTimeout(() => {
+                            closeModal(); // Close modal after delay
+                            window.location.reload(); // Reload page
+                        }, 3000);
                     } else {
                         alert('There was a problem submitting your review.');
                     }
@@ -218,27 +220,8 @@
 
             function closeModal() {
                 successModal.style.display = 'none'; // Hide the modal
-                window.location.reload(); // Reload page
             }
-
-            // Close the modal when clicking the "OK" button
-            document.getElementById("modalOkButton").onclick = function() {
-                closeModal();
-            };
-
-            // Close the modal when clicking the "x" span
-            document.querySelector(".close").onclick = function() {
-                closeModal();
-            };
-
-            // Close the modal when clicking outside of the modal content
-            window.onclick = function(event) {
-                if (event.target === successModal) {
-                    closeModal();
-                }
-            };
         });
     </script>
-    <script src="scripts.js"></script>
 </body>
 </html>
