@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="preload" href="https://formspree.io/static/img/loading.svg?t=1721463946" as="image">
     <style>
-        /* Modal Styles */
+/* Modal Styles */
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -20,17 +20,19 @@
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
 }
 
 .modal-content {
-    margin: 15% auto; /* 15% from the top and centered */
+    margin: 10% auto; /* Centered and a bit closer to the top on mobile */
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 90%; /* Make it almost full-width on mobile */
+    max-width: 500px; /* But limit the max-width for larger screens */
+    background-color: green; /* Green background */
     color: white;
     text-align: center;
+    border-radius: 10px; /* Rounded corners for better aesthetics */
 }
 
 .close {
@@ -45,6 +47,13 @@
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .modal-content {
+        width: 95%; /* Make it almost full-width on smaller screens */
+        margin: 20% auto; /* Adjust margin for better placement on mobile */
+    }
 }
 
     </style>
@@ -158,10 +167,12 @@
         <p>&copy; 2024 Exdollarium. All rights reserved.</p>
     </footer>
 
-    <!-- Modal HTML -->
-<div id="success-modal" class="modal">
+    <!-- Modal -->
+<div id="submissionModal" class="modal">
     <div class="modal-content">
-        <p>Thank you for your review!</p>
+        <span class="close">&times;</span>
+        <p>Review submitted successfully!</p>
+        <button id="modalOkButton">OK</button>
     </div>
 </div>
 
@@ -206,6 +217,36 @@
                 successModal.style.display = 'none'; // Hide the modal
             }
         });
+        // Show modal function
+function showModal() {
+    const modal = document.getElementById("submissionModal");
+    modal.style.display = "block";
+
+    // Close the modal when clicking the "OK" button
+    document.getElementById("modalOkButton").onclick = function() {
+        modal.style.display = "none";
+    };
+
+    // Close the modal when clicking the "x" span
+    document.querySelector(".close").onclick = function() {
+        modal.style.display = "none";
+    };
+
+    // Close the modal when clicking outside of the modal content
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    };
+}
+
+// Example of how to call showModal
+// Call showModal after form submission or any other trigger
+document.getElementById('review-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent form submission
+    showModal();
+    // Here you would also handle the form submission to Formspree
+});
     </script>
     <script src="scripts.js"></script>
 </body>
