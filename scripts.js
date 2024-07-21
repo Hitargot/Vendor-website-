@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Define exchange rates for different payment methods and currencies
     const exchangeRates = {
         paypal: {
-            usd: 100,
+            usd: 1000,
             eur: 1200,
             gbp: 1400
             // Add more currencies as needed
@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         fiverr: {
             usd: 1100,
-            eur: 0.82,
-            gbp: 0.72
+            eur: 1200,
+            gbp: 1500
             // Add more currencies as needed
         },
         us_bank: {
