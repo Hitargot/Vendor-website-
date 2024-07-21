@@ -180,7 +180,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const submitReviewForm = document.getElementById('review-form');
-            const successModal = document.getElementById('success-modal');
+            const successModal = document.getElementById('submissionModal');
 
             submitReviewForm.addEventListener('submit', function(event) {
                 event.preventDefault(); // Prevent default form submission
@@ -196,10 +196,6 @@
                 }).then(response => {
                     if (response.ok) {
                         showModal(); // Show modal on successful submission
-                        setTimeout(() => {
-                            closeModal(); // Close modal after delay
-                            window.location.reload(); // Reload page
-                        }, 3000);
                     } else {
                         alert('There was a problem submitting your review.');
                     }
@@ -215,38 +211,26 @@
 
             function closeModal() {
                 successModal.style.display = 'none'; // Hide the modal
+                window.location.reload(); // Reload page
             }
+
+            // Close the modal when clicking the "OK" button
+            document.getElementById("modalOkButton").onclick = function() {
+                closeModal();
+            };
+
+            // Close the modal when clicking the "x" span
+            document.querySelector(".close").onclick = function() {
+                closeModal();
+            };
+
+            // Close the modal when clicking outside of the modal content
+            window.onclick = function(event) {
+                if (event.target === successModal) {
+                    closeModal();
+                }
+            };
         });
-        // Show modal function
-function showModal() {
-    const modal = document.getElementById("submissionModal");
-    modal.style.display = "block";
-
-    // Close the modal when clicking the "OK" button
-    document.getElementById("modalOkButton").onclick = function() {
-        modal.style.display = "none";
-    };
-
-    // Close the modal when clicking the "x" span
-    document.querySelector(".close").onclick = function() {
-        modal.style.display = "none";
-    };
-
-    // Close the modal when clicking outside of the modal content
-    window.onclick = function(event) {
-        if (event.target === modal) {
-            modal.style.display = "none";
-        }
-    };
-}
-
-// Example of how to call showModal
-// Call showModal after form submission or any other trigger
-document.getElementById('review-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent form submission
-    showModal();
-    // Here you would also handle the form submission to Formspree
-});
     </script>
     <script src="scripts.js"></script>
 </body>
