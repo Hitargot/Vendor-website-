@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimonials</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="icon" href="../img/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="icon" href="../img/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="apple-touch-icon" href="../img/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" href="../img/android-chrome-192x192.png" sizes="192x192" type="image/png">
+    <link rel="icon" href="../img/android-chrome-512x512.png" sizes="512x512" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://formspree.io/static/img/loading.svg?t=1721463946" as="image">
+    <style>
+        /* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    color: white;
+    text-align: center;
+}
+
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="../img/Exodollarium-01.png" alt="Exdollarium Logo">
+            <span><b>Exdollarium</b></span>
+        </div>
+        <nav>
+            <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+            <ul id="nav-links">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="View-current-rate.html">View current rate</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <span class="close-icon" onclick="toggleMenu()">&times;</span>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="testimonials">
+            <div class="container">
+                <h1>Customer Testimonials</h1>
+                <div id="testimonials-container">
+                    <div class="testimonial">
+                        <h3>Olaoluwa</h3>
+                        <p>"I'm impressed by their competitive rates, security measures, and commitment to customer satisfaction."</p>
+                        <p>Service: Crypto</p>
+                        <p>Rating: 5 stars</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <h3>Abu</h3>
+                        <p>"Fast and secure transactions"</p>
+                        <p>Service: PayPal</p>
+                        <p>Rating: 5 stars</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="submit-review">
+            <h2>Submit Your Review</h2>
+            <form id="review-form" action="https://formspree.io/f/mblrlazv" method="POST">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="service">Service:</label>
+                <select id="service" name="service" required>
+                    <option value="" disabled selected>Select a service</option>
+                    <option value="paypal">PayPal</option>
+                    <option value="crypto">Crypto</option>
+                    <option value="payoneer">Payoneer</option>
+                    <option value="fiverr">Fiverr</option>
+                    <option value="us_bank">US Bank</option>
+                    <option value="upwork">Upwork</option>
+                </select>
+
+                <label for="review">Review:</label>
+                <textarea id="review" name="review" required></textarea>
+
+                <label for="rating">Rating:</label>
+                <div class="stars">
+                    <input type="radio" id="star5" name="rating" value="5" required>
+                    <label for="star5" title="5 stars"><i class="fas fa-star"></i></label>
+                    <input type="radio" id="star4" name="rating" value="4">
+                    <label for="star4" title="4 stars"><i class="fas fa-star"></i></label>
+                    <input type="radio" id="star3" name="rating" value="3">
+                    <label for="star3" title="3 stars"><i class="fas fa-star"></i></label>
+                    <input type="radio" id="star2" name="rating" value="2">
+                    <label for="star2" title="2 stars"><i class="fas fa-star"></i></label>
+                    <input type="radio" id="star1" name="rating" value="1">
+                    <label for="star1" title="1 star"><i class="fas fa-star"></i></label>
+                </div>
+
+                <button type="submit">Submit Review</button>
+            </form>
+        </section>
+    </main>
+
+    <section class="button-container">
+        <a href="../index.html#home" class="view-testimonials-btn">Back Home</a>
+    </section>
+    
+    <footer>
+        <div class="footer-links">
+            <a href="https://chat.whatsapp.com/LcT3Fe47rPtCjjL2ZISHcP" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.instagram.com/exdollarium/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://twitter.com/exdollarium/" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61561183927502&mibextid=ZbWKwL" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+        </div>
+        <p>&copy; 2024 Exdollarium. All rights reserved.</p>
+    </footer>
+
+    <!-- Modal HTML -->
+<div id="success-modal" class="modal">
+    <div class="modal-content">
+        <p>Thank you for your review!</p>
+    </div>
+</div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const submitReviewForm = document.getElementById('review-form');
+            const successModal = document.getElementById('success-modal');
+
+            submitReviewForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                const formData = new FormData(submitReviewForm);
+
+                fetch(submitReviewForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        showModal(); // Show modal on successful submission
+                        setTimeout(() => {
+                            closeModal(); // Close modal after delay
+                            window.location.reload(); // Reload page
+                        }, 3000);
+                    } else {
+                        alert('There was a problem submitting your review.');
+                    }
+                }).catch(error => {
+                    console.error('Error:', error);
+                    alert('There was a problem submitting your review.');
+                });
+            });
+
+            function showModal() {
+                successModal.style.display = 'flex'; // Display the modal
+            }
+
+            function closeModal() {
+                successModal.style.display = 'none'; // Hide the modal
+            }
+        });
+    </script>
+</body>
+</html>
