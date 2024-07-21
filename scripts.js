@@ -20,15 +20,15 @@ document.addEventListener('DOMContentLoaded', function() {
             // Add more currencies as needed
         },
         fiverr: {
-            usd: 1100,
-            eur: 1200,
+            usd: 1200,
+            eur: 1300,
             gbp: 1500
             // Add more currencies as needed
         },
         us_bank: {
             usd: 1100,
             eur: 1200,
-            gbp: 1300
+            gbp: 1400
             // Add more currencies as needed
         },
         upwork: {
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Add more currencies as needed
         },
         website_recharge: {
-            5: 1000,
+            5: 10000,
             10: 20000,
             15: 29000,
             20: 38000,
