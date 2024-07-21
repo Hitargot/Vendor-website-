@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Current Rates - Coinvert</title>
+    <link rel="stylesheet" href="../styles/styles.css"> <!-- Link to your CSS file -->
+    <link rel="icon" href="../img/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="icon" href="../img/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="apple-touch-icon" href="../img/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" href="../img/android-chrome-192x192.png" sizes="192x192" type="image/png">
+    <link rel="icon" href="../img/android-chrome-512x512.png" sizes="512x512" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Link to FontAwesome for icons -->
+</head>
+<body>
+      <header>
+        <div class="logo">
+            <img src="../img/Exodollarium-01.png" alt="Exdollarium Logo">
+            <span><b>Exdollarium</b></span>
+        </div>
+        <nav>
+            <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+            <ul id="nav-links">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="View-current-rate.html">View current rate</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <span class="close-icon" onclick="toggleMenu()">&times;</span>
+            </ul>
+        </nav>
+    </header>
+    
+<section class="calculator-section">
+    <h3>Exchange Rate Calculator</h3>
+    <form id="exchange-form">
+        <label for="payment-method">Select Payment Method:</label>
+        <select id="payment-method" name="payment-method">
+            <option value="paypal">PayPal</option>
+            <option value="crypto">Crypto</option>
+            <option value="payoneer">Payoneer</option>
+            <option value="fiverr">Fiverr Withdrawal</option>
+            <option value="us_bank">US Bank Transfer</option>
+            <option value="upwork">Upwork</option>
+            <option value="website_recharge">Website Recharge</option>
+        </select>
+
+        <label for="currency">Select Currency:</label>
+        <select id="currency" name="currency">
+            <option value="usd">USD</option>
+            <option value="eur">EUR</option>
+            <option value="gbp">GBP</option>
+            <!-- Add more currency options as needed -->
+        </select>
+
+        <div id="exchange-rate-info">
+            <label for="exchange-rate">Exchange Rate:</label>
+            <span id="exchange-rate">Select a currency</span>
+        </div>
+
+        <label for="amount">Enter Amount:</label>
+        <input type="number" id="amount" name="amount" step="0.01" min="0" required>
+
+        <div id="recharge-amount-container" style="display: none;">
+            <label for="recharge-amount">Select Recharge Amount:</label>
+            <select id="recharge-amount" name="recharge-amount">
+                <option value="5">5 USD</option>
+                <option value="10">10 USD</option>
+                <option value="15">15 USD</option>
+                <!-- Add more options as needed -->
+            </select>
+        </div>
+
+        <button type="button" onclick="calculate()">Calculate</button>
+    </form>
+
+    <div id="result">
+        <!-- Result will be displayed here -->
+    </div>
+    <section class="trade-now-section">
+            <a href="https://wa.me/message/HIIVLNP7WOZPG1" class="trade-now-button">Trade Now</a>
+        </section>
+    </section>
+   <footer>
+    <footer>
+        <div class="footer-links">
+            <a href="https://chat.whatsapp.com/LcT3Fe47rPtCjjL2ZISHcP" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.instagram.com/exdollarium/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://twitter.com/exdollarium/" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61561183927502&mibextid=ZbWKwL" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+        </div>
+        <p>&copy; 2024 Exdollarium. All rights reserved.</p>
+    </footer>
+    <script src="../js/scripts.js"></script>
+    
+  </body>
+  </html>
