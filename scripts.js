@@ -61,6 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
+
     // Get DOM elements
     const currencySelect = document.getElementById('currency');
     const paymentMethodSelect = document.getElementById('payment-method');
