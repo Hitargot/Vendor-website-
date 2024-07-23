@@ -4,74 +4,274 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exdollarium - FAQ</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="android-chrome-512x512.png" sizes="512x512" type="image/png">
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="icon" href="../img/android-chrome-512x512.png" sizes="512x512" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+        }
+
+        .content-container {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .faq-container, .chatbot-container {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+        }
+        .faq-container h1{
+            color: white;
+        }
+        .separator {
+            width: 2px;
+            background: #ccc;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        .faq-question {
+            background: #f7f7f7;
+            border: none;
+            width: 100%;
+            text-align: left;
+            padding: 10px;
+            font-size: 1.2em;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 5px;
+        }
+
+        .faq-question:hover {
+            background: #e2e2e2;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 10px 0;
+        }
+        .faq-answer ul{
+            list-style: none;
+        }
+
+        .chatbot {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        .chatbot-header {
+            background: orange;
+            color: #fff;
+            padding: 10px;
+            border-radius: 10px 10px 0 0;
+            text-align: center;
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            max-height: 300px;
+        }
+
+        .chatbot-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .chatbot-input button {
+            padding: 10px;
+            border: none;
+            background: orange;
+            color: #fff;
+            border-radius: 5px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        .chatbot-input button:hover {
+            background: darkorange;
+        }
+
+        .message {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .message.user .icon {
+            color: blue;
+        }
+
+        .message.bot .icon {
+            color: green;
+        }
+
+        .message .icon {
+            margin-right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .content-container {
+                flex-direction: column;
+            }
+
+            .separator {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-  <div class="logo">
-    <img src="Exodollarium-01.png" alt="Exdollarium logo">
-    <span><b>EXDOLLARIUM</b></span>
-  </div>
-  <nav>
-    <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
-    <ul id="nav-links" class="nav-links">
-      <li><a href="index.html#home">Home</a></li>
+        <div class="logo">
+            <img src="../img/Exodollarium-01.png" alt="Exdollarium logo">
+            <span><b>EXDOLLARIUM</b></span>
+        </div>
+        <nav>
+            <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+            <ul id="nav-links" class="nav-links">
+                <li><a href="index.html#home">Home</a></li>
                 <li><a href="index.html#about">About</a></li>
                 <li><a href="index.html#services">Services</a></li>
                 <li><a href="testimonials.html">Testimonials</a></li>
                 <li><a href="View-current-rate.html">View current rate</a></li>
                 <li><a href="faq.html">FAQ</a></li>
                 <li><a href="index.html#contact">Contact</a></li>
-      <span class="close-icon" onclick="toggleMenu()">&times;</span>
-    </ul>
-  </nav>
-</header>
+                <span class="close-icon" onclick="toggleMenu()">&times;</span>
+            </ul>
+        </nav>
+    </header>
 
-<main>
-    <section id="faq">
-        <div class="container">
-            <h1>Frequently Asked Questions</h1>
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleAnswer(1)">What is Exdollarium?</button>
-                <div class="faq-answer" id="answer1">
-                    <p>Exdollarium is a platform that allows users to exchange currencies with ease and efficiency.</p>
+        <div class="content-container">
+            <section class="faq-container">
+                <h1>Frequently Asked Questions</h1>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleAnswer(1)">What is Exdollarium?<i class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer" id="answer1">
+                        <p>Exdollarium is a platform that allows users to exchange currencies with ease and efficiency.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleAnswer(2)">How do I exchange currencies?</button>
-                <div class="faq-answer" id="answer2">
-                    <p>You can exchange currencies by signing up on our platform and following the exchange instructions.</p>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleAnswer(2)">How do I exchange currencies?<i class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer" id="answer2">
+                        <p>You can exchange currencies by clicking on Trade Now button.</p>
+                    </div>
                 </div>
-            </div>
-            <!-- Add more FAQ items as needed -->
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleAnswer(3)">How does your business go?<i class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer" id="answer3">
+                        <p>click on "View current rate" to calculate and view the  cureent rate and then click on Trade Now,  you will be direct to whatsapp where the trade will take place</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleAnswer(4)">Why trading with Exdollarium?<i class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer" id="answer4">
+                        <p><ul>
+                            <li>Quick & Easy Withdrawals</li>
+                            <li>Support For Multiple Platform</li>
+                            <li>Secure and Reliable Transaction</li>
+                            <li>Best Rate For All Services Conversion</li>
+                        </ul></p>
+                    </div>
+                </div>
+                <!-- Add more FAQ items as needed -->
+            </section>
+            <div class="separator"></div>
+            <section class="chatbot-container">
+                <div class="chatbot">
+                    <div class="chatbot-header">
+                        <span>Support Chat</span>
+                    </div>
+                    <div class="chatbot-messages" id="chatbot-messages">
+                        <div class="message bot">
+                            <i class="fas fa-robot icon"></i>
+                            <div>Hi! How can I help you today?</div>
+                        </div>
+                    </div>
+                    <div class="chatbot-input">
+                        <input type="text" id="chatbot-input-field" placeholder="Type your message here...">
+                        <button onclick="sendMessage()">Send</button>
+                    </div>
+                </div>
+            </section>
         </div>
-    </section>
-</main>
 
-<footer>
-    <div class="footer-links">
-        <a href="https://chat.whatsapp.com/LcT3Fe47rPtCjjL2ZISHcP" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-        <a href="https://www.instagram.com/exdollarium/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="https://twitter.com/exdollarium/" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
-        <a href="https://www.facebook.com/profile.php?id=61561183927502&mibextid=ZbWKwL" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-    </div>
-    <p>&copy; 2024 Exdollarium. All rights reserved.</p>
-</footer>
+    <footer>
+        <div class="footer-links">
+            <a href="https://chat.whatsapp.com/LcT3Fe47rPtCjjL2ZISHcP" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.instagram.com/exdollarium/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://twitter.com/exdollarium/" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61561183927502&mibextid=ZbWKwL" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+        </div>
+        <p>&copy; 2024 Exdollarium. All rights reserved.</p>
+    </footer>
 
-<script src="scripts.js"></script>
-<script>
-    function toggleAnswer(id) {
-        var answer = document.getElementById(`answer${id}`);
-        if (answer.style.display === 'block') {
-            answer.style.display = 'none';
-        } else {
-            answer.style.display = 'block';
+    <script src="../js/scripts.js"></script>
+    <script>
+        function toggleAnswer(id) {
+            var answer = document.getElementById(`answer${id}`);
+            var icon = answer.previousElementSibling.querySelector('i');
+
+            if (answer.style.display === 'block') {
+                answer.style.display = 'none';
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            } else {
+                answer.style.display = 'block';
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+            }
         }
-    }
-</script>
+
+        function sendMessage() {
+            const inputField = document.getElementById('chatbot-input-field');
+            const message = inputField.value;
+            if (message.trim()) {
+                const chatbotMessages = document.getElementById('chatbot-messages');
+                const userMessage = document.createElement('div');
+                userMessage.classList.add('message', 'user');
+                userMessage.innerHTML = `<i class="fas fa-user icon"></i> <div>${message}</div>`;
+                chatbotMessages.appendChild(userMessage);
+
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+
+                // Simulate bot response
+                setTimeout(() => {
+                    const botMessage = document.createElement('div');
+                    botMessage.classList.add('message', 'bot');
+                    botMessage.innerHTML = `<i class="fas fa-robot icon"></i> <div><h6>Welcome to Exollarium support</h6>Please contact us on <a href="https://chat.whatsapp.com/LcT3Fe47rPtCjjL2ZISHcP" target="_blank">WhatsApp</a> for further assistance.</div>`;
+                    chatbotMessages.appendChild(botMessage);
+                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                }, 1000);
+
+                inputField.value = '';
+            }
+        }
+    </script>
 </body>
 </html>
