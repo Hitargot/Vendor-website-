@@ -2,27 +2,27 @@ document.addEventListener('DOMContentLoaded', function() {
     // Define exchange rates for different payment methods and currencies
     const exchangeRates = {
         paypal: {
-            usd: 1000,
-            eur: 1200,
-            gbp: 1400
+            usd: 1100,
+            eur: 1300,
+            gbp: 1500
             // Add more currencies as needed
         },
         crypto: {
-            usd: 1450,
-            eur: 1550,
-            gbp: 1750
+            usd: 1500,
+            eur: 1600,
+            gbp: 1800
             // Add more currencies as needed
         },
         payoneer: {
-            usd: 1200,
+            usd: 1250,
             eur: 1300,
             gbp: 1500
             // Add more currencies as needed
         },
         fiverr: {
-            usd: 1200,
-            eur: 1300,
-            gbp: 1500
+            usd: 1250,
+            eur: 1400,
+            gbp: 1600
             // Add more currencies as needed
         },
         us_bank: {
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Add more currencies as needed
         },
         upwork: {
-            usd: 1200,
+            usd: 1250,
             eur: 1300,
             gbp: 1500
             // Add more currencies as needed
