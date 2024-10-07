@@ -1,3 +1,5 @@
+// scripts.js
+
 document.addEventListener('DOMContentLoaded', function() {
     // Define exchange rates for different payment methods and currencies
     const exchangeRates = {
@@ -61,7 +63,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-
     // Get DOM elements
     const currencySelect = document.getElementById('currency');
     const paymentMethodSelect = document.getElementById('payment-method');
@@ -70,6 +71,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const amountInput = document.getElementById('amount');
     const resultDisplay = document.getElementById('result');
     const rechargeAmountContainer = document.getElementById('recharge-amount-container');
+
+    // Buttons
+    const calculateButton = document.getElementById('calculate-button');
+    const previewButton = document.getElementById('preview-button');
+    const shareResultButton = document.getElementById('share-result-button');
+
+    // Initialize calculationResult object
+    let calculationResult = {};
 
     // Function to update exchange rate when payment method or currency is selected
     paymentMethodSelect.addEventListener('change', updateExchangeRate);
@@ -85,7 +94,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (selectedMethod === 'website_recharge') {
             rechargeAmountContainer.style.display = 'block';
             const amountInNGN = exchangeRates[selectedMethod][selectedAmount];
-            exchangeRateDisplay.textContent = `${selectedAmount} USD = ${amountInNGN} NGN`;
+            if (amountInNGN) {
+                exchangeRateDisplay.textContent = `${selectedAmount} USD = ${amountInNGN} NGN`;
+            } else {
+                exchangeRateDisplay.textContent = 'Select a valid recharge amount';
+            }
         } else {
             rechargeAmountContainer.style.display = 'none';
             if (exchangeRates[selectedMethod] && exchangeRates[selectedMethod][selectedCurrency]) {
@@ -98,26 +111,171 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Function to calculate exchange based on selected method, currency, and amount
-    window.calculate = function() {
+    calculateButton.addEventListener('click', () => {
         const selectedMethod = paymentMethodSelect.value;
         const selectedCurrency = currencySelect.value;
         const selectedAmount = parseFloat(rechargeAmountSelect.value);
         const amount = parseFloat(amountInput.value);
 
-        if (selectedMethod === 'website_recharge' && !isNaN(selectedAmount)) {
+        if (selectedMethod === 'website_recharge') {
+            if (isNaN(selectedAmount) || !exchangeRates[selectedMethod][selectedAmount]) {
+                alert('Please select a valid recharge amount.');
+                return;
+            }
             const amountInNGN = exchangeRates[selectedMethod][selectedAmount];
             resultDisplay.textContent = `${selectedAmount} USD = ${amountInNGN} NGN`;
-        } else if (exchangeRates[selectedMethod] && exchangeRates[selectedMethod][selectedCurrency] && !isNaN(amount)) {
-            const exchangeRate = exchangeRates[selectedMethod][selectedCurrency];
-            const result = amount * exchangeRate;
-            resultDisplay.textContent = `${amount} ${selectedCurrency.toUpperCase()} = ${result.toFixed(2)} NGN (Approximate)`;
+            calculationResult = {
+                paymentMethod: capitalize(selectedMethod.replace('_', ' ')),
+                currency: 'USD',
+                amount: selectedAmount,
+                convertedAmount: amountInNGN,
+                rechargeAmount: selectedAmount
+            };
         } else {
-            resultDisplay.textContent = '0.00';
+            if (isNaN(amount) || amount <= 0) {
+                alert('Please enter a valid amount.');
+                return;
+            }
+            if (!exchangeRates[selectedMethod][selectedCurrency]) {
+                alert('Selected currency is not supported for the chosen payment method.');
+                return;
+            }
+            const exchangeRate = exchangeRates[selectedMethod][selectedCurrency];
+            const convertedAmount = amount * exchangeRate;
+            resultDisplay.textContent = `${amount} ${selectedCurrency.toUpperCase()} = ${convertedAmount.toFixed(2)} NGN (Approximate)`;
+            calculationResult = {
+                paymentMethod: capitalize(selectedMethod.replace('_', ' ')),
+                currency: selectedCurrency.toUpperCase(),
+                amount: amount,
+                convertedAmount: convertedAmount,
+                rechargeAmount: null
+            };
         }
+
+        // Show the Preview and Share buttons
+        previewButton.style.display = 'inline-block';
+        shareResultButton.style.display = 'inline-block';
+    });
+
+    // Capitalize first letter function
+    function capitalize(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    // Preview Calculation Result
+    window.previewCalculationResult = function () {
+        if (Object.keys(calculationResult).length === 0) {
+            alert('Please perform a calculation first.');
+            return;
+        }
+
+        // Populate the image template with calculation data
+        document.getElementById('template-payment-method').textContent = calculationResult.paymentMethod;
+        document.getElementById('template-currency').textContent = calculationResult.currency;
+        document.getElementById('template-amount').textContent = calculationResult.amount;
+        document.getElementById('template-result').textContent = calculationResult.convertedAmount;
+        document.getElementById('template-date').textContent = new Date().toLocaleString();
+
+        if (calculationResult.rechargeAmount) {
+            document.getElementById('template-recharge').style.display = 'block';
+            document.querySelector('#template-recharge span').textContent = calculationResult.rechargeAmount;
+        } else {
+            document.getElementById('template-recharge').style.display = 'none';
+        }
+
+        // Show the image template
+        const imageTemplate = document.getElementById('image-template');
+        imageTemplate.style.display = 'block';
+
+        // Use html2canvas to take a screenshot
+        html2canvas(imageTemplate).then(canvas => {
+            // Create a new window to display the image
+            const imgData = canvas.toDataURL('image/png');
+            const imgWindow = window.open('', '_blank');
+            imgWindow.document.write(`<img src="${imgData}" alt="Calculation Result Preview" style="max-width: 100%;">`);
+            imgWindow.document.close();
+
+            // Hide the image template after capturing
+            imageTemplate.style.display = 'none';
+        }).catch(error => {
+            console.error('Error generating preview:', error);
+            alert('Failed to generate preview.');
+        });
+    };
+
+    // Share Calculation Result
+    window.shareCalculationResult = function () {
+        if (Object.keys(calculationResult).length === 0) {
+            alert('Please perform a calculation first.');
+            return;
+        }
+
+        // Construct the share message
+        let shareMessage = `Exdollarium Exchange Calculation:\n`;
+        shareMessage += `Payment Method: ${calculationResult.paymentMethod}\n`;
+        shareMessage += `Currency: ${calculationResult.currency}\n`;
+        shareMessage += `Amount: ${calculationResult.amount} ${calculationResult.currency}\n`;
+        shareMessage += `Converted Amount: ${calculationResult.convertedAmount} NGN\n`;
+        if (calculationResult.rechargeAmount) {
+            shareMessage += `Recharge Amount: ${calculationResult.rechargeAmount} USD\n`;
+        }
+        shareMessage += `Date: ${new Date().toLocaleString()}`;
+
+        // Create share URLs for different platforms
+        const whatsappURL = `https://wa.me/?text=${encodeURIComponent(shareMessage)}`;
+        const facebookURL = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(shareMessage)}`;
+        const twitterURL = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareMessage)}`;
+        const linkedinURL = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(window.location.href)}&title=${encodeURIComponent('Exdollarium Exchange Calculation')}&summary=${encodeURIComponent(shareMessage)}`;
+
+        // Open share dialogs
+        const shareWindow = window.open('', '_blank');
+
+        shareWindow.document.write(`
+            <html>
+                <head>
+                    <title>Share Your Calculation</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; padding: 20px; text-align: center; }
+                        .share-buttons a {
+                            display: inline-block;
+                            margin: 10px;
+                            padding: 10px 20px;
+                            background-color: orange;
+                            color: white;
+                            text-decoration: none;
+                            border-radius: 5px;
+                        }
+                        .share-buttons a:hover {
+                            background-color: #e69500;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <h2>Share Your Calculation</h2>
+                    <div class="share-buttons">
+                        <a href="${whatsappURL}" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                        <a href="${facebookURL}" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a>
+                        <a href="${twitterURL}" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+                        <a href="${linkedinURL}" target="_blank"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    </div>
+                </body>
+            </html>
+        `);
+
+        shareWindow.document.close();
+    };
+
+    // Toggle Menu Function (for responsive design)
+    window.toggleMenu = function() {
+        const navLinks = document.getElementById('nav-links');
+        navLinks.classList.toggle('active');
     };
 
     // Initialize exchange rate display
     updateExchangeRate();
+
+
+
 
     // Toggle menu function
     window.toggleMenu = function() {
